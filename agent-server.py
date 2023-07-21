@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import paho.mqtt.client as mqtt
 import json
 
 class ProcessRequest(BaseHTTPRequestHandler):
@@ -20,6 +21,40 @@ class ProcessRequest(BaseHTTPRequestHandler):
             formatted_notification = json.dumps(notification_data, indent=4)
             # Imprimir cuerpo de la notificación
             print(formatted_notification)
+            
+            id_dispositivo = notification_data["data"][0]["id"]     # Guarda el id del dispositivo
+
+            json_data = notification_data["data"]   # almacenamos todos los datos del dispositivo
+            atributos_dispositivos = []
+
+            # Almacenar los atributos de cada dispositivo en la lista
+            for dispositivo in json_data:
+                atributos_dispositivo = {}
+                for key, value in dispositivo.items():
+                    if key != "id" and key != "type":
+                        atributos_dispositivo[key] = value
+                atributos_dispositivos.append(atributos_dispositivo)
+                
+            # Publicación de los datos:
+            # Configuración del cliente MQTT
+            broker_address = "localhost"  # Cambiar por la dirección de tu broker MQTT
+            client = mqtt.Client("Agent")
+
+            # Configuración de usuario y contraseña para la conexión
+            username = "admin" 
+            password = "strik"  
+            client.username_pw_set(username, password)
+
+            # Conexión al broker
+            client.connect(broker_address)
+
+            # Publicación de un mensaje
+            topic = id_dispositivo 
+            message = str(atributos_dispositivo)
+            client.publish(topic, message)
+
+            # Desconexión del cliente
+            client.disconnect()
 
         return 'OK'
 
