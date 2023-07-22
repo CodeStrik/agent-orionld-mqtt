@@ -25,16 +25,15 @@ class ProcessRequest(BaseHTTPRequestHandler):
             id_dispositivo = notification_data["data"][0]["id"]     # Guarda el id del dispositivo
 
             json_data = notification_data["data"]   # almacenamos todos los datos del dispositivo
-            atributos_dispositivos = []
+            atributos_dispositivos_formateados = []
 
-            # Almacenar los atributos de cada dispositivo en la lista
+            # Formatear los atributos de cada dispositivo y almacenarlos en la lista
             for dispositivo in json_data:
-                atributos_dispositivo = {}
-                for key, value in dispositivo.items():
-                    if key != "id" and key != "type":
-                        atributos_dispositivo[key] = value
-                atributos_dispositivos.append(atributos_dispositivo)
-                
+                atributos_formateados = []
+                for atributo, valor in dispositivo.items():
+                    if atributo != "id" and atributo != "type":
+                        atributos_formateados.append(f"{atributo.capitalize()} = {valor['value']}")
+                atributos_dispositivos_formateados.append(", ".join(atributos_formateados))
             # Publicación de los datos:
             # Configuración del cliente MQTT
             broker_address = "localhost"  # Cambiar por la dirección de tu broker MQTT
@@ -50,7 +49,7 @@ class ProcessRequest(BaseHTTPRequestHandler):
 
             # Publicación de un mensaje
             topic = id_dispositivo 
-            message = str(atributos_dispositivo)
+            message = str(atributos_dispositivos_formateados)
             client.publish(topic, message)
 
             # Desconexión del cliente
