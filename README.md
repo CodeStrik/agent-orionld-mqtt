@@ -84,4 +84,4 @@ The lower terminal is the application `subscriber-mqtt.py` for the clients where
 
 Author: [Pedro José Gabaldón Penalva](https://github.com/CodeStrik/)
 
-Repository: [postman-to-markdown](https://github.com/CodeStrik/agent-orionld-mqtt/tree/main)
+Repository: [agent-orionld-mqtt](https://github.com/CodeStrik/agent-orionld-mqtt/tree/main)
