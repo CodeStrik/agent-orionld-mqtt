@@ -1,4 +1,4 @@
-# Crear entidad DeviceMeasurement
+# Create entity DeviceMeasurement
 
 curl -X POST http://localhost:1026/ngsi-ld/v1/entities \
   -H "Content-Type: application/json" \
@@ -22,13 +22,13 @@ curl -X POST http://localhost:1026/ngsi-ld/v1/entities \
     ]
   }'
 
-# Suscripción general
+# General subscription
 
 curl -X POST http://localhost:1026/ngsi-ld/v1/subscriptions \
   -H "Content-Type: application/json" \
   -d '{
     "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-    "description": "Suscripción para cambios en los dispositivos de tipo DeviceMeasurement",
+    "description": "Subscription for changes in DeviceMeasurement type devices.",
     "type": "Subscription",
     "entities": [
       {
@@ -47,7 +47,7 @@ curl -X POST http://localhost:1026/ngsi-ld/v1/subscriptions \
     }
   }'
 
-# Modificar atributos
+# Modify attributes
 
 curl -X PATCH http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:DeviceMeasurement:001/attrs \
   -H "Content-Type: application/json" \
