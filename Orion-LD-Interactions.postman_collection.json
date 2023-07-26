@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "a675a019-7232-4190-99f4-50cb2e97725c",
+		"name": "Orion-LD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28397149"
+	},
+	"item": [
+		{
+			"name": "CREACION:DeviceMeasurement",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"urn:ngsi-ld:DeviceMeasurement:001\",\n  \"type\": \"DeviceMeasurement\",\n  \"controlledProperty\": {\n    \"type\": \"Property\",\n    \"value\": \"humidity\"\n  },\n  \"deviceType\": {\n    \"type\": \"Property\",\n    \"value\": \"sensor\"\n  },\n  \"numValue\": {\n    \"type\": \"Property\",\n    \"value\": 55.2\n  },\n  \"@context\": [\n    \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n  ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREACION:PruebaDispositivo:001",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"@context\": \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\n    \"id\": \"urn:ngsi-ld:PruebaDispositivo:001\",\n    \"type\": \"DeviceMeasurement\",\n    \"temperature\": {\n      \"type\": \"Property\",\n      \"value\": 31.5,\n      \"unitCode\": \"Celsius\"\n    },\n    \"battery\": {\n      \"type\": \"Property\",\n      \"value\": 80,\n      \"unitCode\": \"Percent\"\n    }\n  }"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:PruebaDispositivo:001/attrs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:PruebaDispositivo:001",
+						"attrs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREACION:PruebaDispositivo:002",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"@context\": \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\n    \"id\": \"urn:ngsi-ld:PruebaDispositivo:003\",\n    \"type\": \"DeviceMeasurement\",\n    \"temperature\": {\n      \"type\": \"Property\",\n      \"value\": 31.5,\n      \"unitCode\": \"Celsius\"\n    },\n    \"battery\": {\n      \"type\": \"Property\",\n      \"value\": 80,\n      \"unitCode\": \"Percent\"\n    },\n    \"humidity\": {\n      \"type\": \"Property\",\n      \"value\": 15,\n      \"unitCode\": \"Percent\"\n    }\n  }"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VER:PruebaDispositivo:001",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:PruebaDispositivo:001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:PruebaDispositivo:001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VER:Dispositivos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/ld+json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/?local=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						""
+					],
+					"query": [
+						{
+							"key": "local",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MODIFICACION_DISPOSITIVO",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/merge-patch+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numValue\": {\n    \"type\": \"Property\",\n    \"value\": 64.5\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:DeviceMeasurement:001/attrs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:DeviceMeasurement:001",
+						"attrs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SUSCRIPCION:PruebaDispositivo:001",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"@context\": \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\n    \"description\": \"Notificación del estado del dispositivo\",\n    \"type\": \"Subscription\",\n    \"entities\": [\n      {\n        \"idPattern\": \"urn:ngsi-ld:PruebaDispositivo:001\",\n        \"type\": \"DeviceMeasurement\"\n      }\n    ],\n    \"watchedAttributes\": [\"temperature\", \"battery\"],\n    \"notification\": {\n      \"attributes\": [\"temperature\", \"battery\"],\n      \"format\": \"normalized\",\n      \"endpoint\": {\n        \"uri\": \"http://localhost:8888/notify\",\n        \"accept\": \"application/ld+json\"\n      }\n    }\n  }"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/subscriptions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SUSCRIPCION_GENERAL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"@context\": \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\",\n    \"description\": \"Suscripción para cambios en los dispositivos de tipo DeviceMeasurement\",\n    \"type\": \"Subscription\",\n    \"entities\": [\n      {\n        \"type\": \"DeviceMeasurement\"\n      }\n    ],\n    \"watchedAttributes\": [\"controlledProperty\", \"deviceType\", \"numValue\"],\n    \"q\": \"numValue>0\",\n    \"notification\": {\n      \"attributes\": [\"controlledProperty\", \"deviceType\", \"numValue\"],\n      \"format\": \"normalized\",\n      \"endpoint\": {\n        \"uri\": \"http://192.168.1.47:8888/notify\",\n        \"accept\": \"application/ld+json\"\n      }\n    }\n  }"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/subscriptions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SUSCRIPCIONES_ACTIVAS",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/ld+json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/subscriptions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"subscriptions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR_SUSCRIPCION",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:26241892-2a14-11ee-973e-0242ac1a0003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"subscriptions",
+						"urn:ngsi-ld:Subscription:26241892-2a14-11ee-973e-0242ac1a0003"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR_DISPOSITIVO",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:DeviceMeasurement:001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:DeviceMeasurement:001"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
